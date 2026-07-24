@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Arachnophobia",
+    "type": "Animal",
+    "definition": "An extreme or irrational fear of spiders and other arachnids.",
+    "summary": "Fear of spiders and arachnids.",
+    "description": "Arachnophobia is one of the most common specific phobias. Individuals often experience intense anxiety or panic when encountering spiders or even viewing images of them.",
+    "symptoms": "Rapid heart rate, sweating, trembling, panic attacks, urge to escape, freeze response.",
+    "tags": ["spiders", "bugs", "creepy-crawlies", "animals", "eight-legs"]
+  },
+  {
+    "name": "Acrophobia",
+    "type": "Natural Environment",
+    "definition": "An extreme or irrational fear of heights.",
+    "summary": "Fear of heights.",
+    "description": "Acrophobia involves intense anxiety triggered by elevated places like tall buildings, bridges, cliffs, or balconies.",
+    "symptoms": "Dizziness, loss of balance, nausea, intense fear of falling, feeling compelled to drop to the ground.",
+    "tags": ["heights", "elevations", "cliffs", "tall-buildings", "outdoors"]
+  },
+  {
+    "name": "Claustrophobia",
+    "type": "Situational",
+    "definition": "An extreme or irrational fear of confined or enclosed spaces.",
+    "summary": "Fear of enclosed or tight spaces.",
+    "description": "Claustrophobia is triggered by being in tight, restricted, or crowded spaces such as elevators, small rooms, or windowless spaces.",
+    "symptoms": "Shortness of breath, chest tightness, sweating, feeling trapped, urgent need to leave.",
+    "tags": ["spaces", "elevators", "indoors", "crowds", "tight-spaces"]
+  },
+  {
+    "name": "Thalassophobia",
+    "type": "Natural Environment",
+    "definition": "An intense and persistent fear of deep, vast, or open bodies of water.",
+    "summary": "Fear of the ocean or deep water.",
+    "description": "Thalassophobia centers on the mystery, vastness, dark depths, and unknown creatures hidden within oceans or deep lakes.",
+    "symptoms": "Hyperventilation, rapid pulse, dread when looking at ocean imagery, sense of impending doom.",
+    "tags": ["ocean", "water", "deep-water", "sea", "nature"]
+  },
+  {
+    "name": "Ophidiophobia",
+    "type": "Animal",
+    "definition": "An extreme fear of snakes.",
+    "summary": "Fear of snakes.",
+    "description": "Sufferers experience overwhelming anxiety triggered by live snakes, photos, videos, or snake-like objects.",
+    "symptoms": "Extreme terror, crying, panic, physical paralysis, elevated heart rate.",
+    "tags": ["snakes", "reptiles", "animals", "outdoors"]
+  },
+  {
+    "name": "Aerophobia",
+    "type": "Situational",
+    "definition": "An extreme fear of flying or being in aircraft.",
+    "summary": "Fear of flying or airplanes.",
+    "description": "Aerophobia involves intense distress associated with traveling in airplanes, helicopters, or other air vehicles.",
+    "symptoms": "Nausea, panic attacks during takeoff or turbulence, sweating, gastrointestinal distress.",
+    "tags": ["flying", "planes", "aviation", "travel", "transportation"]
+  },
+  {
+    "name": "Nyctophobia",
+    "type": "Natural Environment",
+    "definition": "An extreme, irrational fear of the dark or night.",
+    "summary": "Fear of darkness.",
+    "description": "Nyctophobia is characterized by an intense fear of darkness, driven by the perception of unseen threats lurking in the dark.",
+    "symptoms": "Insomnia, severe anxiety at night, compulsion to leave lights on, elevated heart rate.",
+    "tags": ["darkness", "night", "nighttime", "indoors"]
+  },
+  {
+    "name": "Cynophobia",
+    "type": "Animal",
+    "definition": "An overwhelming or irrational fear of dogs.",
+    "summary": "Fear of dogs.",
+    "description": "Cynophobia is an animal phobia involving severe anxiety triggered by dogs of any size or breed.",
+    "symptoms": "Freezing in place, screaming, running away, hyperventilating, heart palpitations.",
+    "tags": ["dogs", "animals", "pets", "outdoors"]
+  },
+  {
+    "name": "Glossophobia",
+    "type": "Social",
+    "definition": "An intense fear of public speaking or speaking in front of an audience.",
+    "summary": "Fear of public speaking.",
+    "description": "Glossophobia is a widespread anxiety response where individuals feel intense dread when required to perform or present in front of a group.",
+    "symptoms": "Dry mouth, shaky voice, excessive sweating, trembling hands, stomach butterflies.",
+    "tags": ["social", "speaking", "crowds", "school", "work"]
+  },
+  {
+    "name": "Trypophobia",
+    "type": "Other",
+    "definition": "An aversion or revulsion to repetitive patterns of small holes, bumps, or clusters.",
+    "summary": "Fear or revulsion of clustered hole patterns.",
+    "description": "Trypophobia is triggered by seeing closely packed groups of tiny holes or bumps, such as honeycombs or seed pods.",
+    "symptoms": "Skin crawling, goosebumps, intense disgust, nausea, itchiness, visual discomfort.",
+    "tags": ["patterns", "holes", "textures", "visual"]
+  },
+  {
+    "name": "Astraphobia",
+    "type": "Natural Environment",
+    "definition": "An extreme fear of thunder and lightning.",
+    "summary": "Fear of thunderstorms.",
+    "description": "Astraphobia causes severe anticipatory anxiety during incoming weather, leading sufferers to seek windowless shelters.",
+    "symptoms": "Trembling, seeking shelter under covers, obsessively monitoring weather forecasts, crying.",
+    "tags": ["weather", "thunder", "storms", "nature", "outdoors"]
+  },
+  {
+    "name": "Hemophobia",
+    "type": "Blood-Injection-Injury",
+    "definition": "An intense and irrational fear of blood.",
+    "summary": "Fear of blood or bleeding.",
+    "description": "Hemophobia stands out because it frequently causes a vasovagal response—a sudden drop in blood pressure that leads to fainting.",
+    "symptoms": "Fainting, lightheadedness, nausea, rapid pulse followed by sudden drop in heart rate.",
+    "tags": ["blood", "medical", "injuries", "health"]
+  },
+  {
+    "name": "Trypanophobia",
+    "type": "Blood-Injection-Injury",
+    "definition": "An extreme fear of medical procedures involving needles or injections.",
+    "summary": "Fear of needles and injections.",
+    "description": "Trypanophobia involves severe distress when facing blood draws, vaccinations, or IV lines.",
+    "symptoms": "Dizziness, fainting, extreme dread prior to appointments, flight response.",
+    "tags": ["needles", "medical", "injections", "health"]
+  },
+  {
+    "name": "Agoraphobia",
+    "type": "Situational",
+    "definition": "An anxiety disorder involving fear of environments that might cause panic, helplessness, or embarrassment.",
+    "summary": "Fear of open, crowded, or unavoidable spaces.",
+    "description": "Agoraphobia involves avoiding places where escape might be difficult or help unavailable during a panic attack.",
+    "symptoms": "Refusal to leave home, dependence on a companion, panic attacks, chest pain.",
+    "tags": ["spaces", "crowds", "outdoors", "public", "social"]
+  },
+  {
+    "name": "Pyrophobia",
+    "type": "Other",
+    "definition": "An extreme or irrational fear of fire.",
+    "summary": "Fear of fire or flames.",
+    "description": "Pyrophobia causes overwhelming distress in the presence of open flames, campfires, candles, or smoke.",
+    "symptoms": "Obsessive checking of heat sources, extreme panic near flames, nausea, rapid breathing.",
+    "tags": ["fire", "flames", "heat", "danger"]
+  },
+  {
+    "name": "Mysophobia",
+    "type": "Other",
+    "definition": "An extreme or irrational fear of germs, contamination, and dirt.",
+    "summary": "Fear of germs or contamination.",
+    "description": "Mysophobia drives individuals to engage in compulsive cleaning, handwashing, and excessive avoidance of unsterilized surfaces.",
+    "symptoms": "Compulsive handwashing, overuse of disinfectants, avoidance of physical contact, panic near dirt.",
+    "tags": ["germs", "cleanliness", "health", "medical", "indoors"]
+  },
+  {
+    "name": "Coulrophobia",
+    "type": "Other",
+    "definition": "An abnormal or exaggerated fear of clowns.",
+    "summary": "Fear of clowns.",
+    "description": "Coulrophobia is often triggered by the exaggerated features, makeup, and unpredictable behavior associated with clown performers.",
+    "symptoms": "Tears, extreme anxiety, elevated heart rate, nausea, overwhelming distress.",
+    "tags": ["clowns", "costumes", "entertainment", "social"]
+  },
+  {
+    "name": "Entomophobia",
+    "type": "Animal",
+    "definition": "An extreme or persistent fear of insects.",
+    "summary": "Fear of insects and bugs.",
+    "description": "Entomophobia involves intense fear of bugs, beetles, bees, or crawling insects, leading people to avoid outdoor activities.",
+    "symptoms": "Screaming, sensation of bugs crawling on skin, panic, immediate urge to escape outdoors.",
+    "tags": ["insects", "bugs", "animals", "nature", "outdoors"]
+  },
+  {
+    "name": "Emetophobia",
+    "type": "Other",
+    "definition": "An intense, irrational fear of vomiting or seeing others vomit.",
+    "summary": "Fear of vomiting.",
+    "description": "Emetophobia can severely impact eating habits, social gatherings, travel, and health behaviors due to a fear of nausea or sickness.",
+    "symptoms": "Severe food restriction, hyper-awareness of stomach sensations, panic when feeling sick.",
+    "tags": ["sickness", "health", "medical", "stomach"]
+  },
+  {
+    "name": "Gerascophobia",
+    "type": "Other",
+    "definition": "An abnormal or excessive fear of growing old or aging.",
+    "summary": "Fear of aging.",
+    "description": "Gerascophobia centers on anxiety surrounding physical decline, loss of independence, changing appearance, and mortality.",
+    "symptoms": "Obsessive preoccupation with youthful appearance, anxiety about birthdays, severe dread of physical decline.",
+    "tags": ["aging", "time", "health", "personal"]
+  }
+]

@@ -1,0 +1,36 @@
+html {
+    /* Stops mobile browsers from forcing their own minimum text sizing */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    display: flex;
+}
+
+body {
+    background-color: lightgray;
+}
+
+header {
+    background-color: #7e44cf;
+    color: white;
+    height: 30vh;
+    width: 100vw;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#website-title {
+    width: 85vw;
+    font-size: 7.65vw;
+    text-align: center;
+}
+
+*[id^="phobia"] { /* All of the elements of a phobia panel */
+    color: white;
+
+    &title {
+        font-weight: bold;
+    }
+}
