@@ -12,12 +12,12 @@
     <header>
         <h1 id="website-title">Phobia Pages</h1>
     </header>
-    <div style="align-items: center;">
-        <h3 id="phobia-title">{% block title %}Arachnophobia{% endblock %}</h3>
+    <div class="phobia-div">
+        <h3 class="phobia-title">{{ title }}</h3>
         <br>
-        <h4 id="phobia-fear-of">{% block fear_of %}Spiders{% endblock %}</h4>
+        <h4 class="phobia-fear-of">{{ fear_of }}</h4>
         <br>
-        <h6 id="phobia-tags">{% block tags %}Spiders, arachnids, eight legs{% endblock %}</h6>
+        <h6 class="phobia-tags">{{ tags }}</h6>
     </div>
 </body>
 </html>

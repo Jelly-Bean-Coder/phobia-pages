@@ -27,7 +27,7 @@ header {
     text-align: center;
 }
 
-*[id^="phobia"] { /* All of the elements of a phobia panel */
+*[class^="phobia"] { /* All of the elements of a phobia panel */
     color: white;
 
     &title {
