@@ -1,29 +1,59 @@
 from pathlib import Path
 
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, request
 import click
 import json
 from .models import Phobia, Tag
 from .extensions import db
 import os
 
-os.chdir(Path(__file__).parent) # Change working directory to the current file's directory
-
 views_blueprint = Blueprint('views', __name__)
 
-
-@views_blueprint.route('/')
+@views_blueprint.route("/")
 def home():
-    phobia = db.session.query(Phobia).filter_by(name='Acrophobia').first()
-    tags = [tag.name for tag in db.session.query(Tag).filter(Tag.phobias.any(name=phobia.name)).all()]
+    try:
+        tags = Tag.query.all()
+        return render_template("pre-search.html", all_tags=Tag.query.all())
 
-    if not phobia:
-        return render_template("index.html")
+    except Exception as e:
+        print(e)
 
-    return render_template("index.html", title=phobia.name, fear_of=phobia.summary, tags=", ".join(tags).capitalize())
+
+@views_blueprint.route('/after_search', methods=['POST'])
+def after_search():
+    phobias = None
+    if request.form.get("phobia") and request.form.get("tag"):
+        phobias = []
+        tag_objs = Tag.query.filter_by(name=request.form.get("tag")).first()
+        if tag_objs:
+            tagged_phobias = tag_objs.phobias
+            for fear in tagged_phobias:
+                if fear.name == request.form.get("phobia"):
+                    phobias.append(fear)
+
+    elif request.form.get("tag"):
+        tags = Tag.query.filter_by(name=request.form.get("tag")).first()
+        if tags:
+            phobias = tags.phobias
+
+    elif request.form.get("phobia"):
+        phobia = Phobia.query.filter_by(name=request.form.get("phobia")).all()
+        if phobia:
+            phobias = phobia
+
+
+
+    else:
+        return render_template("error.html", error="Invalid search term")
+
+    if not phobias:
+        return render_template("error.html", error="No phobia found")
+
+
+    return render_template("post-search.html", phobias=phobias)
 
 @views_blueprint.cli.command("update-db-json")
-@click.option("--file-path", default="./static/json/phobias.json", help="path to json file")
+@click.option("--file-path", default="./static/json/phobias.json", help="Path to json file")
 @click.option("--reset", is_flag=True, default=False, help="Reset database")
 def update_db(file_path, reset):
     with current_app.app_context():

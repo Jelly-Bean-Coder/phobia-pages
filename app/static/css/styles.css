@@ -3,7 +3,6 @@ html {
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    display: flex;
 }
 
 body {
@@ -25,12 +24,4 @@ header {
     width: 85vw;
     font-size: 7.65vw;
     text-align: center;
-}
-
-*[class^="phobia"] { /* All of the elements of a phobia panel */
-    color: white;
-
-    &title {
-        font-weight: bold;
-    }
 }

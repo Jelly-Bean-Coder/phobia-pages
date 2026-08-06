@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block content %}
+<button onclick="window.location.href='{{ url_for('views.home') }}'" class="btn btn-primary"><- Back to Search</button>
+{% for phobia in phobias %}
+<div class="phobia-div">
+        <h3 class="phobia-title">{{ phobia.name }}</h3>
+        <br>
+        <h4 class="phobia-fear-of">{{ phobia.summary }}</h4>
+        <br>
+        <h6 class="phobia-tags">{% for tag in phobia.tags %}{{ tag.name }}, {% endfor %}</h6>
+</div>
+{% endfor %}
+{% endblock %}
