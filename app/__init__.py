@@ -1,11 +1,9 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy() # Create database
-cursor = db.session
-from . import models
+from .extensions import db
+from .models import Phobia, Tag
 
 def create_app():
+
     app = Flask(__name__) # Create app
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///phobias.db" # set location of database
@@ -13,10 +11,11 @@ def create_app():
 
     db.init_app(app)
 
-    from .routes import routes_blueprint
-    app.register_blueprint(routes_blueprint) # Register all routes. Done later to prevent circular imports
+    from .views import views_blueprint
+    app.register_blueprint(views_blueprint) # Register all routes. Done later to prevent circular imports
 
     with app.app_context(): # Create tables for M2M relationship
         db.create_all()
 
     return app
+
