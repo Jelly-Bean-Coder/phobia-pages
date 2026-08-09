@@ -25,3 +25,9 @@ header {
     font-size: 7.65vw;
     text-align: center;
 }
+
+#search-form {
+    padding: 5px;
+    background-color: white;
+    width: 100vw;
+}

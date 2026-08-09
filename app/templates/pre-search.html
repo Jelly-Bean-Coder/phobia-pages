@@ -1,14 +1,23 @@
 {% extends "index.html" %}
 {% block content %}
-<form action="{{ url_for('views.after_search') }}" class="form-control" method="POST">
+<form action="{{ url_for('views.after_search') }}" class="d-flex gap-2 align-items-center" id="search-form" method="POST">
     <input type="text" name="phobia">
-    <select name="tag">
-            {% for tag in all_tags %}
-                {% if tag.name %}
-                    <option value="{{ tag.name }}">{{ tag.name }}</option>
-                {% endif %}
-            {% endfor %}
-    </select>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Tags
+        </button>
+
+        <div class="dropdown-menu">
+                {% for tag in all_tags %}
+                    {% if tag.name %}
+                        <label class="dropdown-item">
+                            <input type="checkbox" name="tags" value="{{ tag.name }}">
+                            {{ tag.name }}
+                        </label>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
 {% endblock %}
