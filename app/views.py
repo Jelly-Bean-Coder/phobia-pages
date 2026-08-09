@@ -1,11 +1,11 @@
-from pathlib import Path
-
 from flask import Blueprint, render_template, current_app, request
 import click
 import json
+
+from flask_login import login_required, current_user
+
 from .models import Phobia, Tag
 from .extensions import db
-import os
 
 views_blueprint = Blueprint('views', __name__)
 
@@ -13,7 +13,7 @@ views_blueprint = Blueprint('views', __name__)
 def home():
     try:
         tags = Tag.query.all()
-        return render_template("pre-search.html", all_tags=Tag.query.all())
+        return render_template("pre-search.html", all_tags=tags)
 
     except Exception as e:
         print(e)
@@ -21,25 +21,39 @@ def home():
 
 @views_blueprint.route('/after_search', methods=['POST'])
 def after_search():
-    phobias = None
-    if request.form.get("phobia") and request.form.get("tag"):
-        phobias = []
-        tag_objs = Tag.query.filter_by(name=request.form.get("tag")).first()
-        if tag_objs:
-            tagged_phobias = tag_objs.phobias
-            for fear in tagged_phobias:
-                if fear.name == request.form.get("phobia"):
-                    phobias.append(fear)
+    phobias = []
 
-    elif request.form.get("tag"):
-        tags = Tag.query.filter_by(name=request.form.get("tag")).first()
+    if request.form.get("phobia") and request.form.getlist("tags"):
+        queried_phobias = Phobia.query.filter(Phobia.name.ilike(f"%{request.form.get("phobia")}%")).all()
+        tags = Tag.query.filter(Tag.name.in_(request.form.getlist("tags"))).all()
+
         if tags:
-            phobias = tags.phobias
+            for tag in tags:
+                for phobia in queried_phobias:
+                    for phobia_tag in phobia.tags:
+                        if tag.name == phobia_tag.name:
+                            if phobia not in phobias:
+                                phobias.append(phobia)
+
+    elif request.form.getlist("tags"):
+        tags = Tag.query.filter(Tag.name.in_(request.form.getlist("tags"))).all()
+        print(tags)
+
+        if tags != []:
+            for tag in tags:
+                for phobia in tag.phobias:
+                    if phobia not in phobias:
+                        phobias.append(phobia)
 
     elif request.form.get("phobia"):
-        phobia = Phobia.query.filter_by(name=request.form.get("phobia")).all()
-        if phobia:
-            phobias = phobia
+        phobia_query_name = None
+
+        if request.form.get("phobia"):
+            phobia_query_name = Phobia.query.filter(Phobia.name.ilike(f"%{request.form.get("phobia")}%")).all()
+
+        if phobia_query_name:
+            for phobia in phobia_query_name:
+                phobias.append(phobia)
 
 
 
@@ -51,6 +65,21 @@ def after_search():
 
 
     return render_template("post-search.html", phobias=phobias)
+
+@views_blueprint.route('/bookmarks', methods=['POST', 'GET'])
+@login_required
+def bookmarks():
+    return render_template("bookmarks.html", bookmarks=current_user.bookmarks)
+
+@views_blueprint.route('/detailed_phobia', methods=['GET'])
+def detailed_phobia():
+    if not request.args.get("phobia_id"):
+        return render_template("error.html", error="No phobia ID provided")
+
+    if not Phobia.query.filter_by(id=request.args.get("phobia_id")).first():
+        return render_template("error.html", error="Phobia not found")
+
+    return render_template("detailed-phobia.html", phobia=Phobia.query.filter_by(id=request.args.get("phobia_id")).first())
 
 @views_blueprint.cli.command("update-db-json")
 @click.option("--file-path", default="./static/json/phobias.json", help="Path to json file")
