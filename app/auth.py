@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect, session
-from flask_login import login_required, login_manager, logout_user, current_user
+from flask_login import login_required, login_manager, logout_user, current_user, login_user
 from .models import User
 from .extensions import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -21,7 +21,7 @@ def login():
             user = User.query.filter_by(email=email).first()
 
             if user and check_password_hash(user.password, password):
-                load_user(user.id)
+                login_user(user, remember=True)
                 flash("Login successful", category="success")
                 return redirect(url_for('views.home'))
             else:
