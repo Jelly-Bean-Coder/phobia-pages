@@ -4,7 +4,7 @@ import json
 
 from flask_login import login_required, current_user
 
-from .models import Phobia, Tag
+from .models import Phobia, Tag, User, Bookmark
 from .extensions import db
 
 views_blueprint = Blueprint('views', __name__)

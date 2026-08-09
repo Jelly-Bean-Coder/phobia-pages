@@ -1,3 +1,5 @@
+from email.policy import default
+
 from flask_login import UserMixin
 from . import db
 
@@ -28,7 +30,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    gateway_tier = db.Column(db.Boolean, nullable=False)
+    gateway_tier = db.Column(db.Boolean, nullable=False, default=False)
     pro_tier = db.Column(db.Boolean, nullable=False, default=False)
 
 class Bookmark(db.Model):
