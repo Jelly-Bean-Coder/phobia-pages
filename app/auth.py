@@ -37,7 +37,7 @@ def login():
 def logout():
     logout_user()
     flash("You have been logged out", category="success") # Attempt to make an info cat. later
-    return redirect(url_for('views.login'))
+    return redirect(url_for('auth.login'))
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
 def signup():
