@@ -17,6 +17,7 @@ class Phobia(db.Model):
     summary = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     symptoms= db.Column(db.Text, nullable=False)
+
     tags = db.relationship('Tag', secondary=phobia_tag_bridge, back_populates='phobias')
 
 
@@ -33,8 +34,13 @@ class User(db.Model, UserMixin):
     gateway_tier = db.Column(db.Boolean, nullable=False, default=False)
     pro_tier = db.Column(db.Boolean, nullable=False, default=False)
 
+    bookmarks = db.relationship('Bookmark', back_populates='user', lazy=True)
+
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     phobia_id = db.Column(db.Integer, db.ForeignKey('phobia.id'), nullable=False)
+
+    user = db.relationship('User', back_populates='bookmarks')
+    phobia = db.relationship('Phobia')

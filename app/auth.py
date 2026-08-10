@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect, session
 from flask_login import login_required, login_manager, logout_user, current_user, login_user
 from .models import User
-from .extensions import db, login_manager
+from .extensions import db, login_manager, anonymity_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth_blueprint = Blueprint('auth', __name__)
@@ -12,6 +12,7 @@ def load_user(user_id):
 
 
 @auth_blueprint.route('/login', methods=['GET', 'POST'])
+@anonymity_required()
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -40,6 +41,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 @auth_blueprint.route('/signup', methods=['GET', 'POST'])
+@anonymity_required()
 def signup():
     if request.method == 'POST':
         email = request.form.get('email')

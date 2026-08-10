@@ -1,6 +1,6 @@
-{% extends "index.html %}
+{% extends "index.html" %}
 {% block content %}
 {% for bookmark in bookmarks %}
-<h1>{{ bookmark.title }}</h1>
+<h1>{{ bookmark.phobia.name }}</h1>
 {% endfor %}
 {% endblock %}

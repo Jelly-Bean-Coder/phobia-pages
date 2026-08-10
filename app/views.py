@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app, request
+from flask import Blueprint, render_template, current_app, request, flash
 import click
 import json
 
@@ -39,11 +39,13 @@ def after_search():
         tags = Tag.query.filter(Tag.name.in_(request.form.getlist("tags"))).all()
         print(tags)
 
-        if tags != []:
-            for tag in tags:
-                for phobia in tag.phobias:
-                    if phobia not in phobias:
-                        phobias.append(phobia)
+        if not tags:
+            return render_template("error.html", error="No tags selected")
+
+        for tag in tags:
+            for phobia in tag.phobias:
+                if phobia not in phobias:
+                    phobias.append(phobia)
 
     elif request.form.get("phobia"):
         phobia_query_name = None
@@ -70,6 +72,19 @@ def after_search():
 @login_required
 def bookmarks():
     return render_template("bookmarks.html", bookmarks=current_user.bookmarks)
+
+@views_blueprint.route('/create_bookmark', methods=['GET'])
+def create_bookmark():
+    phobia_id = request.args.get('phobia_id')
+    if current_user.is_authenticated:
+        if phobia_id:
+            bookmark = Bookmark(user_id=current_user.id, phobia_id=phobia_id)
+            db.session.add(bookmark)
+            db.session.commit()
+            flash("Bookmark created successfully", "success")
+            return "200 Status OK"
+
+    return ""
 
 @views_blueprint.route('/detailed_phobia', methods=['GET'])
 def detailed_phobia():
