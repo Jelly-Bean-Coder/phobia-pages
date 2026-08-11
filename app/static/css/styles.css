@@ -6,6 +6,11 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
     background-color: lightgray;
 }
 
@@ -18,16 +23,34 @@ header {
     display:flex;
     align-items: center;
     justify-content: center;
+
+
+    h1 {
+        width: 85vw;
+        font-size: 7.65vw;
+        text-align: center;
+    }
 }
 
-#website-title {
-    width: 85vw;
-    font-size: 7.65vw;
-    text-align: center;
+.bookmark-created {
+    background-color: #e3b600;
 }
 
 #search-form {
     padding: 5px;
     background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+#tmp {
+    height: 70vh;
     width: 100vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
