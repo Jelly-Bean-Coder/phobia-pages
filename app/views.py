@@ -5,7 +5,7 @@ import json
 from flask_login import login_required, current_user
 
 from .models import Phobia, Tag, User, Bookmark
-from .extensions import db
+from .extensions import db, check_gateway
 
 views_blueprint = Blueprint('views', __name__)
 
@@ -74,15 +74,22 @@ def bookmarks():
     return render_template("bookmarks.html", bookmarks=current_user.bookmarks)
 
 @views_blueprint.route('/create_bookmark', methods=['GET'])
+@check_gateway
 def create_bookmark():
     phobia_id = request.args.get('phobia_id')
     if current_user.is_authenticated:
         if phobia_id:
+            if Bookmark.query.filter_by(phobia_id=phobia_id, user_id=current_user.id).first():
+                db.session.delete(Bookmark.query.filter_by(phobia_id=phobia_id, user_id=current_user.id).first())
+                db.session.commit()
+                flash("Bookmark removed successfully", "success")
+                return "200 Status OK", 200
+
             bookmark = Bookmark(user_id=current_user.id, phobia_id=phobia_id)
             db.session.add(bookmark)
             db.session.commit()
             flash("Bookmark created successfully", "success")
-            return "200 Status OK"
+            return "201 Status OK", 201
 
     return ""
 
