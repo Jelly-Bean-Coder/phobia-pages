@@ -1,4 +1,4 @@
-from email.policy import default
+from datetime import datetime
 
 from flask_login import UserMixin
 from . import db
@@ -44,3 +44,17 @@ class Bookmark(db.Model):
 
     user = db.relationship('User', back_populates='bookmarks')
     phobia = db.relationship('Phobia')
+
+
+class AnxietyLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    # Links to the specific phobia entry they were browsing/logging
+    phobia_name = db.Column(db.Integer, db.ForeignKey('phobia.id'), nullable=False)
+
+    # What specifically happened
+    trigger = db.Column(db.String(255), nullable=False)
+    notes = db.Column(db.Text, nullable=True)
+    severity = db.Column(db.Integer, nullable=False)  # 1-10
+    created_at = db.Column(db.DateTime, default=datetime.now())
