@@ -103,6 +103,19 @@ def detailed_phobia():
 
     return render_template("detailed-phobia.html", phobia=Phobia.query.filter_by(id=request.args.get("phobia_id")).first())
 
+
+
+@views_blueprint.route('/logs', methods=['GET'])
+@login_required
+@check_gateway
+def logs():
+    return render_template("logs.html", logs=current_user.logs)
+
+
+
+
+
+# DEV COMMAND
 @views_blueprint.cli.command("update-db-json")
 @click.option("--file-path", default="./static/json/phobias.json", help="Path to json file")
 @click.option("--reset", is_flag=True, default=False, help="Reset database")

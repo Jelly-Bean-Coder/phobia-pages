@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
     pro_tier = db.Column(db.Boolean, nullable=False, default=False)
 
     bookmarks = db.relationship('Bookmark', back_populates='user', lazy=True)
+    logs = db.relationship('AnxietyLog', back_populates='user', lazy=True)
 
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,4 +58,6 @@ class AnxietyLog(db.Model):
     trigger = db.Column(db.String(255), nullable=False)
     notes = db.Column(db.Text, nullable=True)
     severity = db.Column(db.Integer, nullable=False)  # 1-10
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user = db.relationship('User', back_populates='logs')

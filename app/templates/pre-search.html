@@ -1,49 +1,46 @@
 {% extends "index.html" %}
 {% block content %}
-<div class="container centered-div">
-    <div id=tmp" class="row align-items-center justify-content-center">
-        <div class="col-md-8 col-lg-6">
+<div class="form-div">
+    <form action="{{ url_for('views.after_search') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-            <form action="{{ url_for('views.after_search') }}" method="POST">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-                <!-- Phobia Input -->
-                <div class="mb-3">
-                    <label for="phobia" class="form-label">Phobia:</label>
-                    <input type="text" id="phobia" name="phobia" class="form-control" placeholder="Enter phobia name...">
-                </div>
-
-                <!-- Tags Dropdown -->
-                <div class="mb-3">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Tags
-                        </button>
-
-                        <div class="dropdown-menu w-100 px-3" aria-labelledby="dropdownMenuButton">
-                            {% for tag in all_tags %}
-                                {% if tag.name %}
-                                    <div class="form-check my-1" onclick="event.stopPropagation();">
-                                        <input class="form-check-input" type="checkbox" name="tags" value="{{ tag.name }}" id="tag-{{ loop.index }}">
-                                        <label class="form-check-label" for="tag-{{ loop.index }}">
-                                            {{ tag.name }}
-                                        </label>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-secondary">Signup</a>
-                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary">Login</a>
-                </div>
-            </form>
-
+        <!-- Phobia Input -->
+        <div class="mb-3">
+            <label for="phobia" class="form-label font-weight-bold">Phobia:</label>
+            <input type="text" id="phobia" name="phobia" class="form-control" placeholder="Enter phobia name...">
         </div>
-    </div>
+
+        <!-- Tags Dropdown -->
+        <div class="mb-3">
+            <label class="form-label">Filter by Tags:</label>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle w-100 text-start" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Tags
+                </button>
+
+                <div class="dropdown-menu w-100 px-3" aria-labelledby="dropdownMenuButton">
+                    {% for tag in all_tags %}
+                        {% if tag.name %}
+                            <div class="form-check my-2" onclick="event.stopPropagation();">
+                                <input class="form-check-input" type="checkbox" name="tags" value="{{ tag.name }}" id="tag-{{ loop.index }}">
+                                <label class="form-check-label" for="tag-{{ loop.index }}">
+                                    {{ tag.name }}
+                                </label>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex flex-wrap gap-2 pt-2">
+            <button type="submit" class="btn btn-primary px-4">Search</button>
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-secondary">Signup</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary">Login</a>
+            <a href="{{ url_for('views.bookmarks') }}" class="btn btn-outline-secondary">Bookmarks</a>
+            <a href="{{ url_for('views.logs') }}" class="btn btn-outline-secondary">Logs</a>
+        </div>
+    </form>
 </div>
 {% endblock %}

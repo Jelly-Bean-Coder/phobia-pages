@@ -1,9 +1,20 @@
 {% extends "index.html" %}
-{% block main_class %}
-    <div class="container">
-        <div class="col-md-12">
-            <h1>Logs</h1>
-            <p>This is the logs page.</p>
+{% block main_class %}{% endblock %}
+{% block content %}
+        <div class="container grid">
+            <button class="btn btn-outline-primary btn-md">&plus;</button>
+            <div class="col-md-12">
+                {% for log in logs %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ log.phobia_name }}</h5>
+                            <p class="card-text">{{ log.trigger }}</p>
+                            <p class="card-text">{{ log.notes }}</p>
+                            <p class="card-text">{{ log.severity }}</p>
+                            <p class="card-text">{{ log.created_at }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
 {% endblock %}

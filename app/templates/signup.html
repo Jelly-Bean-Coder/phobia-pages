@@ -1,29 +1,30 @@
 {% extends "index.html" %}
 {% block content %}
-<div class="container centered-div">
-    <div id="tmp" class="row align-items-center justify-content-center">
-        <div class="col-md-8 col-lg-6">
+<div class="form-div">
+    <form method="POST" action="{{ url_for('auth.signup') }}">
+        <div class="mb-3">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> <!-- For integrity !-->
 
-            <form method="POST" action="{{ url_for('auth.signup') }}">
-                <div class="mb-3">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
-                    <label for="username">Username</label>
-                </div>
-
-                <div class="mb-3">
-                <input type="email" id="email" name="email" placeholder="Email" required>
-                <label for="email">Email</label>
-
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <label for="password">Password</label>
-
-                <input type="password" id="check_password" name="check_password" placeholder="Confirm Password" required>
-                <label for="check_password">Confirm Password</label>
-
-                <button type="submit">Sign Up</button>
-            </form>
+            <label class="form-label font-weight-bold" for="username">Username</label>
+            <input class="form-control" type="text" id="username" name="username" placeholder="Username" required>
         </div>
-    </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label font-weight-bold">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label font-weight-bold" for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label font-weight-bold" for="check_password">Confirm Password</label>
+            <input class="form-control" type="password" id="check_password" name="check_password" placeholder="Confirm Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
 </div>
 {% endblock %}

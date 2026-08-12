@@ -1,6 +1,13 @@
 {% extends "index.html" %}
+{% block main_class %}{% endblock %}
 {% block content %}
 {% for bookmark in bookmarks %}
-<h1>{{ bookmark.phobia.name }}</h1>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>{{ bookmark.phobia.name }}</h1>
+        </div>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}
