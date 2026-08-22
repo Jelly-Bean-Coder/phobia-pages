@@ -52,12 +52,13 @@ class AnxietyLog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     # Links to the specific phobia entry they were browsing/logging
-    phobia_name = db.Column(db.Integer, db.ForeignKey('phobia.id'), nullable=False)
+    phobia_id = db.Column(db.Integer, db.ForeignKey('phobia.id'), nullable=False)
 
     # What specifically happened
     trigger = db.Column(db.String(255), nullable=False)
     notes = db.Column(db.Text, nullable=True)
     severity = db.Column(db.Integer, nullable=False)  # 1-10
-    created_at = db.Column(db.DateTime, default=datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.strftime("%Y-%b-%d %H:%M %p"))
 
     user = db.relationship('User', back_populates='logs')
+    phobia = db.relationship('Phobia')

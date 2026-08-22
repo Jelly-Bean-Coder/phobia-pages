@@ -4,7 +4,7 @@ import json
 
 from flask_login import login_required, current_user
 
-from .models import Phobia, Tag, User, Bookmark
+from .models import Phobia, Tag, User, Bookmark, AnxietyLog
 from .extensions import db, check_gateway
 
 views_blueprint = Blueprint('views', __name__)
@@ -70,6 +70,7 @@ def after_search():
 
 @views_blueprint.route('/bookmarks', methods=['POST', 'GET'])
 @login_required
+@check_gateway
 def bookmarks():
     return render_template("bookmarks.html", bookmarks=current_user.bookmarks)
 
@@ -82,16 +83,36 @@ def create_bookmark():
             if Bookmark.query.filter_by(phobia_id=phobia_id, user_id=current_user.id).first():
                 db.session.delete(Bookmark.query.filter_by(phobia_id=phobia_id, user_id=current_user.id).first())
                 db.session.commit()
-                flash("Bookmark removed successfully", "success")
-                return "200 Status OK", 200
+                return "Bookmark removed successfully", 200
 
             bookmark = Bookmark(user_id=current_user.id, phobia_id=phobia_id)
             db.session.add(bookmark)
             db.session.commit()
-            flash("Bookmark created successfully", "success")
-            return "201 Status OK", 201
+            return "Bookmark created successfully", 201
 
-    return ""
+    return render_template(f"{request.endpoint}.html", phobia_id=phobia_id)
+
+@views_blueprint.route('/logs', methods=['GET'])
+@login_required
+@check_gateway
+def logs():
+    return render_template("logs.html", logs=current_user.logs, phobias=Phobia.query.all())
+
+
+@views_blueprint.route('/create_log', methods=['POST'])
+@login_required
+@check_gateway
+def create_log():
+    if request.method == 'POST':
+        log_form = request.form
+        if log_form:
+            db.session.add(AnxietyLog(user_id=current_user.id, phobia_id=log_form.get("phobia"), trigger=log_form.get("trigger"), notes=log_form.get("notes"), severity=log_form.get("severity")))
+            db.session.commit()
+            flash('Log created successfully!', 'success')
+        else:
+            flash('Log content cannot be empty.', 'error')
+
+    return render_template("logs.html", logs=current_user.logs)
 
 @views_blueprint.route('/detailed_phobia', methods=['GET'])
 def detailed_phobia():
@@ -102,14 +123,6 @@ def detailed_phobia():
         return render_template("error.html", error="Phobia not found")
 
     return render_template("detailed-phobia.html", phobia=Phobia.query.filter_by(id=request.args.get("phobia_id")).first())
-
-
-
-@views_blueprint.route('/logs', methods=['GET'])
-@login_required
-@check_gateway
-def logs():
-    return render_template("logs.html", logs=current_user.logs)
 
 
 

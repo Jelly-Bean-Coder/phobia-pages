@@ -10,23 +10,23 @@
 </head>
 <body>
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-          <!-- Added position-absolute, top-0, start-50, translate-middle-x, w-50, and z-3 -->
-          <div class="alert alert-{{ category if category in ['success', 'danger', 'warning', 'info', 'secondary'] else 'primary' }} alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x w-100 z-3 mt-3" role="alert" style="z-index: 1050;">
-            {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+        {% if messages %}
+            {% for category, message in messages %}
+              <!-- Added position-absolute, top-0, start-50, translate-middle-x, w-50, and z-3 -->
+              <div class="alert alert-{{ category if category in ['success', 'danger', 'warning', 'info', 'secondary'] else 'primary' }} alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x w-100 z-3 mt-3" role="alert" style="z-index: 1050;">
+                {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
 
     <header>
         <h1 id="website-title" class="text-white">Phobia Pages</h1>
     </header>
 
-    <main class="{% block main_class %}flex-grow-1 d-flex align-items-center justify-content-center{% endblock %}">
+    <main class="{% block main_class %}d-flex flex-grow-1{% endblock %}">
         {% block content %}{% endblock %}
     </main>
 

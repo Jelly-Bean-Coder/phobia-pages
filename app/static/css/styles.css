@@ -33,7 +33,7 @@ header {
 }
 
 .bookmark-created {
-    background-color: #ffcd00;
+    background-color: #ffc107;
 }
 
 .form-div {
@@ -43,7 +43,7 @@ header {
     align-items: center;
     flex-grow: 1;
 
-    form {
+    > form {
         width: 80%;
         margin: 5px auto;
     }
@@ -52,4 +52,13 @@ header {
 
 .card {
     border: 3px solid black;
+}
+
+#phobia-type {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-radius: 4px;
+
+    font-weight: bold;
+    font-size: 0.65rem;
 }
