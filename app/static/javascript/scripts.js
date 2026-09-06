@@ -37,3 +37,33 @@ async function bookmark(phobia_id) {
         newFlashMessage("Bookmark removed!", "success");
     }
 }
+
+function selectPillOption(button, position, value) {
+      // Slide the background
+      document.getElementById('pill-bg').style.transform = `translateX(${position}%)`;
+
+      let monthlyBilling = document.getElementById('monthly-row');
+      let yearlyBilling = document.getElementById('yearly-row');
+
+      // Toggle colors
+      const buttons = button.parentElement.querySelectorAll('.btn');
+      buttons.forEach(btn => { btn.classList.replace('text-white', 'text-secondary'); });
+      button.classList.replace('text-secondary', 'text-white');
+
+      // TRACKING: This variable now holds the active selection
+      console.log("User selected option:", value);
+
+      if (value == "yearly") {
+
+            yearlyBilling.classList.remove("d-none");
+
+
+            monthlyBilling.classList.add("d-none");
+
+        } else {
+
+            monthlyBilling.classList.remove("d-none");
+
+            yearlyBilling.classList.add("d-none");
+        }
+    }
