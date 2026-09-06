@@ -76,4 +76,4 @@ def signup():
 @auth_blueprint.route('/billing', methods=['GET'])
 @login_required
 def billing():
-    return "<h1>Billing</h1>"
+    return render_template("billing.html", user=current_user)
