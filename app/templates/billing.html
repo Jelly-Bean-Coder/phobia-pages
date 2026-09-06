@@ -1,8 +1,84 @@
 {% extends "base.html" %}
 {% block main_class %}{% endblock %}
+
 {% block content %}
-{% for bookmark in bookmarks %}
+<!-- Single wrapper container to align content centrally -->
+<div class="d-flex flex-column align-items-center w-100 p-3">
 
+    <!-- Billing Toggle Switch (Pill) -->
+    <div class="position-relative bg-light border rounded-pill d-inline-flex p-1" style="width: 240px;">
+        <div id="pill-bg" class="position-absolute bg-primary rounded-pill top-0 bottom-0 start-0 m-1" style="width: calc(50% - 4px); transform: translateX(0); transition: transform 0.2s ease;"></div>
+        <button onclick="selectPillOption(this, 0, 'monthly')" class="btn w-50 rounded-pill position-relative z-1 text-white border-0" type="button">Monthly</button>
+        <button onclick="selectPillOption(this, 100, 'yearly')" class="btn w-50 rounded-pill position-relative z-1 text-secondary border-0" type="button">Yearly</button>
+    </div>
 
-{% endfor %}
+    <!-- Pricing Table -->
+    <!-- Fixed table layout locks widths. Inline background override forces transparency. -->
+    <table class="table table-borderless align-middle text-center m-4 w-75" style="table-layout: fixed; background: transparent !important; --bs-table-bg: transparent;">
+        <thead>
+            <tr>
+                <!-- Inline width percentages stop columns from shifting when text swaps -->
+                <th class="text-start" scope="col" style="width: 40%;">Features</th>
+                <th scope="col" style="width: 20%;"><h4 class="mb-0">Basic</h4></th>
+                <th scope="col" style="width: 20%;"><h4 class="mb-0">Gateway</h4></th>
+                <th scope="col" style="width: 20%;"><h4 class="mb-0">Pro</h4></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cost Rows (Toggled via JS) -->
+            <tr id="monthly-row">
+                <td class="text-start fw-bold">Cost</td>
+                <td>$0 / mo</td>
+                <td>$6.50 / mo</td>
+                <td>$11 / mo</td>
+            </tr>
+            <tr id="yearly-row" class="d-none">
+                <td class="text-start fw-bold">Cost</td>
+                <td>$0.00 / yr</td>
+                <td>$65 / yr</td>
+                <td>$110 / yr</td>
+            </tr>
+
+            <tr>
+                <td class="text-start fw-bold">Sign Up</td>
+                <td><button class="btn btn-outline-primary">Sign Up</button></td>
+                <td><button class="btn btn-outline-primary">Sign Up</button></td>
+                <td><button class="btn btn-outline-primary">Sign Up</button></td>
+            </tr>
+
+            <!-- Feature Rows -->
+            <tr>
+                <td class="text-start">Account Creation</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+            </tr>
+            <tr>
+                <td class="text-start">Basic Features</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+            </tr>
+            <tr>
+                <td class="text-start">Reading About Phobias</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+                <td>&checkmark;</td>
+            </tr>
+            <tr>
+                <td class="text-start">Bookmarking</td>
+                <td class="text-danger">&times;</td>
+                <td class="text-success">&checkmark;</td>
+                <td class="text-success">&checkmark;</td>
+            </tr>
+            <tr>
+                <td class="text-start">Anxiety Logs</td>
+                <td class="text-danger">&times;</td>
+                <td class="text-danger">&times;</td>
+                <td class="text-success">&checkmark;</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
 {% endblock %}
