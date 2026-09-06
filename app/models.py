@@ -58,7 +58,7 @@ class AnxietyLog(db.Model):
     trigger = db.Column(db.String(255), nullable=False)
     notes = db.Column(db.Text, nullable=True)
     severity = db.Column(db.Integer, nullable=False)  # 1-10
-    created_at = db.Column(db.DateTime, default=datetime.strftime("%Y-%b-%d %H:%M %p"))
+    created_at = db.Column(db.DateTime, default=datetime.now)
 
     user = db.relationship('User', back_populates='logs')
     phobia = db.relationship('Phobia')
