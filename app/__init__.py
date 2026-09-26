@@ -18,8 +18,11 @@ def create_app():
 
     from .views import views_blueprint
     from .auth import auth_blueprint
+    from .extensions import js_stream_bp
+
     app.register_blueprint(views_blueprint) # Register all routes. Done later to prevent circular imports
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(js_stream_bp)
 
     with app.app_context(): # Create tables for M2M relationship
         db.create_all()
