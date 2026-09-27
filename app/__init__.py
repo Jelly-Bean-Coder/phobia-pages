@@ -1,7 +1,12 @@
-from flask import Flask
+import http
+# CRITICAL: Import Werkzeug's HTTPException instead of http.client's
+from werkzeug.exceptions import HTTPException
+
+from flask import Flask, render_template
 from .extensions import db, login_manager, csrf
 from .models import Phobia, Tag
 import os
+import socket
 
 def create_app():
 
@@ -27,5 +32,23 @@ def create_app():
     with app.app_context(): # Create tables for M2M relationship
         db.create_all()
 
-    return app
+    # Define error_codes here so it is available inside the error handler below
+    error_codes = [status.value for status in http.HTTPStatus if status.value >= 400]
 
+    # Error handler function (Takes exactly ONE argument: error)
+    @app.errorhandler(HTTPException)
+    def error_handler(error):
+        # Werkzeug HTTPExceptions natively provide 'code' and 'description' attributes
+        code = getattr(error, 'code', None)
+        error_msg = getattr(error, 'description', "no error message")
+
+        if not error_msg:
+            error_msg = "no error message"
+
+        # Safe formatting now that error_codes is defined above
+        error_text = f"Error {str(code) if code else '[SYSTEM]'}: {error_msg}"
+
+        # Returning the code along with the template passes the true HTTP status to the browser
+        return render_template("error.html", error=error_text), code
+
+    return app

@@ -85,8 +85,8 @@ select#search_method {
 select#search_method::picker-icon {
   flex-shrink: 0;
   color: #6c757d;              /* Muted gray arrow */
-  transition: transform 0.2s ease;
-  content: "˅";
+  transition: transform 300ms ease;
+  content: "▼";
 
 }
 
@@ -121,6 +121,13 @@ select#search_method:open::picker-icon {
 ::picker(select) option:checked {
   background-color: #0d6efd;   /* Bootstrap Primary Blue on hover/active */
   color: #ffffff;              /* Text turns white when option is active */
+}
+
+
+#phobia-type {
+    font-size: 0.35em;
+    vertical-align: middle;
+    margin-left: 0.5rem;
 }
 
 
