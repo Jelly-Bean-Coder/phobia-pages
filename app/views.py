@@ -3,6 +3,7 @@ import click
 import json
 
 from flask_login import login_required, current_user
+from sqlalchemy import null
 
 from .models import Phobia, Tag, User, Bookmark, AnxietyLog
 from .extensions import db, check_gateway, newFlash
@@ -99,7 +100,33 @@ def create_bookmark():
 @login_required
 @check_gateway
 def logs():
-    return render_template("logs.html", logs=current_user.logs, phobias=Phobia.query.all(), pro=current_user.pro_tier)
+    chart_list = []
+    dates_list = []
+
+    chart_list.append(["Date"])
+    for log in current_user.logs:
+        if log.phobia.name not in chart_list[0]:
+            chart_list[0].append(log.phobia.name)
+
+    for _ in chart_list[0]:
+        for log in current_user.logs:
+            if log.created_at.strftime("%Y-%m-%d") not in dates_list:
+                dates_list.append(log.created_at.strftime("%Y-%m-%d"))
+
+    for date in dates_list:
+        tmp = [date] + [None] * (len(chart_list[0]) - 1)  # Initialize with None for each phobia
+
+        for log in AnxietyLog.query.filter_by(user_id=current_user.id).filter(db.func.date(AnxietyLog.created_at) == date).all():
+
+            for i in range(len(chart_list[0])):
+                if not i: continue # If "i" is 0, skip (date column)
+
+                if chart_list[0][i] == log.phobia.name: # If the phobia name matches, append the severity
+                    tmp[i] = log.severity
+
+        chart_list.append(tmp)
+
+    return render_template("logs.html", logs=current_user.logs, phobias=Phobia.query.all(), pro=current_user.pro_tier, matrix=chart_list)
 
 
 @views_blueprint.route('/create_log', methods=['POST'])
