@@ -85,8 +85,8 @@ select#search_method {
 select#search_method::picker-icon {
   flex-shrink: 0;
   color: #6c757d;              /* Muted gray arrow */
-  transition: transform 0.2s ease;
-  content: "˅";
+  transition: transform 300ms ease;
+  content: "▼";
 
 }
 
