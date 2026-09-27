@@ -18,7 +18,7 @@ header {
     background-color: #7e44cf;
     color: white;
     height: 30vh;
-    width: 100vw;
+    width: 100%;
 
     display:flex;
     align-items: center;
@@ -50,15 +50,78 @@ header {
 }
 
 
-.card {
-    border: 3px solid black;
+
+
+
+
+/* ==========================================
+   1. OPT-IN & MAIN BUTTON LAYOUT
+   ========================================== */
+/* Unlocks deep styling for the select box and its dropdown menu */
+select#search_method,
+::picker(select) {
+  appearance: base-select;
 }
 
-#phobia-type {
-    background-color: lightblue;
-    border: 1px solid black;
-    border-radius: 4px;
+/* Styles the main closed select box button */
+select#search_method {
+  display: inline-flex;
+  align-items: center;         /* Vertically centers text and arrow */
+  justify-content: space-between; /* Pushes text to the left, arrow to the right */
+  gap: 0.75rem;                /* Safe spacing between text and arrow */
+  padding: 0.375rem 0.75rem;
+  background-color: #ffffff;   /* Clean light background */
+  color: #212529;              /* Dark text for contrast */
+  border: 1px solid #dee2e6;   /* Subtle Bootstrap gray border */
+  border-radius: 0.375rem 0px 0px 0.375rem;
+  cursor: pointer;
 
-    font-weight: bold;
-    font-size: 0.65rem;
+  /* Bootstrap Fixes */
+  background-image: none;
+  --bs-form-select-bg-img: none;
 }
+
+/* Ensures the dropdown arrow stays on the right and never wraps or squishes */
+select#search_method::picker-icon {
+  flex-shrink: 0;
+  color: #6c757d;              /* Muted gray arrow */
+  transition: transform 0.2s ease;
+  content: "˅";
+
+}
+
+/* Rotates the arrow upside down cleanly when the menu opens */
+select#search_method:open::picker-icon {
+  transform: rotate(180deg);
+}
+
+
+/* ==========================================
+   2. DROPDOWN OVERLAY & OPTIONS
+   ========================================== */
+/* Styles the actual dropdown overlay panel */
+::picker(select) {
+  background-color: #ffffff;   /* Light theme background */
+  border: 1px solid #dee2e6;   /* Subtle boundary border */
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.075); /* Soft, lighter shadow */
+}
+
+/* Styles individual options inside the picker popover */
+::picker(select) option {
+  padding: 0.375rem 0.75rem;
+  color: #212529;              /* Dark text color */
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+/* Handles hover, selection, and keyboard focus states perfectly */
+::picker(select) option:hover,
+::picker(select) option:checked {
+  background-color: #0d6efd;   /* Bootstrap Primary Blue on hover/active */
+  color: #ffffff;              /* Text turns white when option is active */
+}
+
+
+
