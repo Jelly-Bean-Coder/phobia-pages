@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% block main_class %}{% endblock %}
 {% block content %}
-<template id="template"></template>
 <button id="bookmark-star" onclick="bookmark( {{ phobia.id }} )" class="btn btn-outline-warning">&star;</button>
 <div style="display: flex; justify-content: center; align-items: center">
-    <h1>{{ phobia.name }}</h1>
-    <p id="phobia-type" class="p-md-1 p-lg-2">{{ phobia.type | upper }}</p>
+    <h1 id="phobia-header">{{ phobia.name }}<span id="phobia-type" class="badge bg-primary">{{ phobia.type | upper }}</span></h1>
 
 </div>
 

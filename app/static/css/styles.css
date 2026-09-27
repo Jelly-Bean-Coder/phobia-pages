@@ -124,4 +124,11 @@ select#search_method:open::picker-icon {
 }
 
 
+#phobia-type {
+    font-size: 0.35em;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+}
+
+
 
