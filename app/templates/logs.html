@@ -112,6 +112,11 @@ function drawChart() {
         interpolateNulls: true,
         pointSize: 5,
         dataOpacity: 0.5,
+        vAxis: {
+            title: 'Severity',
+            minValue: 0,
+            maxValue: 10
+        }
     };
 
     var chart = new google.visualization.AreaChart(document.getElementById('phobiaLogsChart'));
