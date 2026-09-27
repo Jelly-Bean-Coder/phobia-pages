@@ -1,23 +1,56 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% block content %}
-<form action="{{ url_for('views.after_search') }}" class="d-flex gap-2 align-items-center" id="search-form" method="POST">
-    <input type="text" name="phobia">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Select Tags
-        </button>
+<div class="form-div">
+    <form action="{{ url_for('views.after_search') }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-        <div class="dropdown-menu">
-                {% for tag in all_tags %}
-                    {% if tag.name %}
-                        <label class="dropdown-item">
-                            <input type="checkbox" name="tags" value="{{ tag.name }}">
-                            {{ tag.name }}
-                        </label>
-                    {% endif %}
-                {% endfor %}
+        <!-- Phobia Input -->
+        <div class="mb-3">
+            <label for="phobia" class="form-label fw-bold">Phobia:</label>
+
+            <div class="input-group">
+                <!-- Select dropdown properly sized next to the text input -->
+                <select class="form-select flex-grow-0 w-25" name="search_method" id="search_method">
+                    <option value="" disabled selected>Search method</option>
+                    <option value="name">Normal</option>
+                    <option value="AI">AI</option>
+                </select>
+                <input type="text" id="phobia" name="phobia" class="form-control" placeholder="Enter phobia name..." aria-label="Phobia search term">
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+
+        <!-- Tags Dropdown -->
+        <div class="mb-3">
+            <label class="form-label fw-bold">Filter by Tags:</label>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle w-100 text-start" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Tags
+                </button>
+
+                <div class="dropdown-menu w-100 px-3" aria-labelledby="dropdownMenuButton">
+                    {% for tag in all_tags %}
+                        {% if tag.name %}
+                            <div class="form-check my-2" onclick="event.stopPropagation();">
+                                <input class="form-check-input" type="checkbox" name="tags" value="{{ tag.name }}" id="tag-{{ loop.index }}">
+                                <label class="form-check-label w-100" for="tag-{{ loop.index }}">
+                                    {{ tag.name }}
+                                </label>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex flex-wrap gap-2 pt-2">
+            <button type="submit" class="btn btn-primary px-4">Search</button>
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-secondary">Signup</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary">Login</a>
+            <a href="{{ url_for('views.bookmarks') }}" class="btn btn-outline-secondary">Bookmarks</a>
+            <a href="{{ url_for('views.logs') }}" class="btn btn-outline-secondary">Logs</a>
+            <a href="{{ url_for('auth.billing') }}" class="btn btn-outline-secondary">Billing</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
